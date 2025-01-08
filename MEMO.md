@@ -20,9 +20,20 @@ password
 
 
 # docker execについて
-docker ps をして、sail-8.3/appのNAMEをコピーして、
+docker ps をして、sail-8.3/appのIDをコピーして、
 `docker exec -it こぴーしたもの bash`
 のようにするとcmdでも行ける
 
 (例)
-`docker exec -it b1d55b3d8b93f458c278af79d96e0140b5c20137a9e745ebc24374dd2aa20453-laravel.test-1 bash`
+`docker exec -it b1d55b3 bash`
+
+
+別タブでcmsを開き、execで入る。
+そこでnpm run dev をしておくのがいい。
+
+
+
+# どうしたらいいの？こういう時
+
+## レイアウトが崩れている
+A. exec で入って、`npm run dev`をして
