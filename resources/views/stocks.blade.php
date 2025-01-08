@@ -11,16 +11,19 @@
                             <img src="/image/{{$stock->imagePath}}" alt="" class="incart" >
                             <br>
                             {{$stock->explain}} <br>
+                            <form action="addMyCart" method="post">
+                                @csrf
+                                <input type="hidden" name="stockId" value="{{ $stock->id }}">
+                                <input type="submit" value="カートに入れる">
+                            </form>
+
                         </div>
     
                     @endforeach
-
                 </div>
-
                 <div class="text-center" style="width: 200px;margin: 20px auto;">
                     {{  $stocks->links()}} 
                 </div>
-
             </div>
         </div>
     </div>
