@@ -35,4 +35,20 @@ class StockController extends Controller
 
     }
 
+    public function deleteMyCartStock(Request $request,UserStock $userStock)
+    {
+
+        //カートから削除の処理
+        $stockId=$request->stockId;
+        $message = $userStock->deleteMyCartStock($stockId);
+
+        //追加後の情報を取得
+        $myCartStocks = $userStock->showMyCart();
+
+        return view('myCart',compact('myCartStocks' , 'message'));
+
+    }
+
+
+
 }
