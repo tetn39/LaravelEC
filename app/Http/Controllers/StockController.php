@@ -9,28 +9,30 @@ use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller
 {
-   public function index(){
-        // 1ページ6個の在庫情報を取得
-       $stocks = Stock::SimplePaginate(6);
-       return view('stocks',compact('stocks'));
-   }
+    public function index(){
+            // 1ページ6個の在庫情報を取得
+        $stocks = Stock::SimplePaginate(6);
+        return view('stocks',compact('stocks'));
+    }
 
-    public function addMyCart(Request $request){
-        $userId = Auth::id(); 
-        $stockId = $request->input('stockId');
+    public function myCart(UserStock $userStock)
+    {
+        $myCartStocks = $userStock->showMyCart();
+        return view('myCart',compact('myCartStocks'));
+    }
 
-        $cartAddInfo = UserStock::firstOrCreate(['stockId' => $stockId,'userId' => $userId]);
+    public function addMycart(Request $request,UserStock $userStock)
+    {
 
-        if($cartAddInfo->wasRecentlyCreated){
-            $message = 'カートに追加しました';
-        }
-        else{
-            $message = 'カートに登録済みです';
-        }
+        //カートに追加の処理
+        $stockId=$request->stockId;
+        $message = $userStock->addMyCart($stockId);
 
-        $myCartStocks = UserStock::where('userId',$userId)->get();
+        //追加後の情報を取得
+        $myCartStocks = $userStock->showMyCart();
 
         return view('myCart',compact('myCartStocks' , 'message'));
 
     }
+
 }

@@ -5,16 +5,18 @@
             <div class="">
                 <div class="grid grid-cols-4 gap-4 flex-wrap">
                     @foreach($stocks as $stock)
-                        <div class="mycart_box text-center rounded shadow-lg bg-white p-6">
+                        <div class="mycart_box text-sm text-center rounded shadow-lg bg-white p-6">
                             {{$stock->name}} <br>
                             {{$stock->fee}}円<br>
                             <img src="/image/{{$stock->imagePath}}" alt="" class="incart" >
                             <br>
                             {{$stock->explain}} <br>
+
+
                             <form action="addMyCart" method="post">
                                 @csrf
                                 <input type="hidden" name="stockId" value="{{ $stock->id }}">
-                                <input type="submit" value="カートに入れる">
+                                <button class="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded ">カートに入れる</button>
                             </form>
 
                         </div>
